@@ -4,9 +4,25 @@
 	<title>Parcel Sandbox</title>
 	<meta charset="UTF-8" />
 </head>
-
+ 
 <body>
-	<div id="app"></div>
+	<div id="app">
+			<input type="text" id="filter" name="filter" value=""/>
+			<select id="category" name="category">
+				<option default value="posts">Posts</option>
+				<option value="comments">Comments</option>
+				<option value="albums">Albums</option>
+				<option value="photos">Photos</option>
+				<option value="todos">Todos</option>
+				<option value="users">Users</option>
+			</select>
+			<button id="butt-submit" name="butt-submit">OK</button>
+		<div id="results">
+			<table id="res-table">
+			</table>
+
+		</div>
+	</div>
 
 	<script src="src/index.js"></script>
 </body>
