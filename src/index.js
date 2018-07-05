@@ -1,11 +1,14 @@
 var subButt = document.getElementById("butt-submit");
 let results = document.getElementById("results");
+let errBlock = document.getElementById("err-block");
 let filter = document.getElementById("filter");
 let category = document.getElementById("category");
+let table = document.getElementById("res-table");
+
 results.hidden = true;
+errBlock.hidden = true;
 
 window.onload = function() {
-    alert(localStorage.getItem("category"));
     filter.value = localStorage.getItem("filter") || "";
     category.value = localStorage.getItem("category") || "posts";
     let lsData = localStorage.getItem("data") || false;
@@ -18,7 +21,7 @@ window.onload = function() {
 subButt.addEventListener("click", function() {
     let url = `https://jsonplaceholder.typicode.com/${category.value}`;
     if (filter.value) {
-        url += filter;
+        url += `/${filter.value}`;
     }
 
     let json_res = "";
@@ -41,14 +44,18 @@ subButt.addEventListener("click", function() {
             printData(data);
         })
         .catch(function(error) {
-            console.log(error);
+            printError(error);
         });
 });
 
-let getRemoteData;
+let printError = function(error) {
+    table.innerHTML = "";
+    errBlock.innerText = error;
+    results.hidden = true;
+    errBlock.hidden = false;
+};
 
 let printData = function(data) {
-    let table = document.getElementById("res-table");
     table.innerHTML = "";
 
     let header = table.insertRow(0);
@@ -93,7 +100,3 @@ let setTHeader = function(header, obj) {
     }
     return header;
 };
-
-document.addEventListener("DOMContentLoaded", function() {
-    alert("1");
-});
